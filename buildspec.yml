@@ -23,7 +23,7 @@ phases:
     commands:
       - echo Build completed successfully
       # copy JAR to S3
-      - aws s3 cp target/*.jar s3://your-artifacts-bucket-myfilescloud/
+      - aws s3 cp target/*.jar s3://myfilescloud/
       - echo JAR uploaded to S3
 
 artifacts:
