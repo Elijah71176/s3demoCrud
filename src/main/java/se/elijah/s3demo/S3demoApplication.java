@@ -30,13 +30,18 @@ public class S3demoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Dotenv dotenv = Dotenv.load();
+        //Dotenv dotenv = Dotenv.load();
 
-        String bucketName = dotenv.get("BUCKET_NAME");
+       /* String bucketName = dotenv.get("BUCKET_NAME");
         String accessKey = dotenv.get("ACCESS_KEY");
         String secretKey = dotenv.get("SECRET_KEY");
-        String region = dotenv.get("AWS_REGION");
+        String region = dotenv.get("AWS_REGION");*/
 
+        Dotenv dotenv = Dotenv.load();
+        String bucketName = dotenv.get("BUCKET_NAME");
+        String accessKey = dotenv.get("AWS_ACCESS_KEY_ID");
+        String secretKey = dotenv.get("AWS_SECRET_ACCESS_KEY");
+        String region = dotenv.get("AWS_DEFAULT_REGION");
 
         Scanner scanner = new Scanner(System.in);
         // S3Client s3Client = new S3Client(); //need dependencies
