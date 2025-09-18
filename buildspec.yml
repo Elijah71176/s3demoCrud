@@ -18,7 +18,7 @@ phases:
       - echo Build started on `date`
       - mvn clean package -DskipTests
       - echo Build completed on `date`
-      - echo Listing contents of target directory:
+      - "echo Listing contents of target directory:"
       - ls -la target/
 
   post_build:
