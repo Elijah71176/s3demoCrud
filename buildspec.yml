@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto21   # or corretto11 if you use Java 11
+      java: corretto21
     commands:
       - echo Installing Maven...
       - yum install -y maven
@@ -22,10 +22,9 @@ phases:
   post_build:
     commands:
       - echo Build completed successfully
-      # copy JAR to S3
-      - aws s3 cp target/*.jar s3://myfilescloud/
-      - echo JAR uploaded to S3
 
 artifacts:
   files:
     - target/*.jar
+  discard-paths: yes
+  base-directory: target
