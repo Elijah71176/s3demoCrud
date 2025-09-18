@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto21   # Use Java 21
+      java: corretto21
     commands:
       - echo Installing Maven...
       - yum install -y maven
@@ -24,11 +24,11 @@ phases:
   post_build:
     commands:
       - echo Post-build started on `date`
-      # Check if a JAR file exists
-      - JAR_FILE=$(ls target/*.jar 2>/dev/null | head -n 1)
-      - if [ -z "$JAR_FILE" ]; then echo "ERROR: No JAR found in target/"; exit 1; fi
-      - echo "Uploading $JAR_FILE to S3..."
-      - aws s3 cp "$JAR_FILE" s3://myfilescloud/
+      # Get the final JAR name from Maven
+      - JAR_FILE=$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout).jar
+      - if [ ! -f "target/$JAR_FILE" ]; then echo "ERROR: JAR not found in target/"; exit 1; fi
+      - echo "Uploading target/$JAR_FILE to S3..."
+      - aws s3 cp "target/$JAR_FILE" s3://myfilescloud/
       - echo JAR uploaded to S3 successfully
 
 artifacts:
