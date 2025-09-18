@@ -37,6 +37,9 @@ public class S3demoApplication implements CommandLineRunner {
         String secretKey = dotenv.get("AWS_SECRET_ACCESS_KEY");
         String region = dotenv.get("AWS_DEFAULT_REGION");
 
+        // DEBUG: check which key is used
+        System.out.println("Using AWS access key: " + accessKey);
+
         Scanner scanner = new Scanner(System.in);
         // S3Client s3Client = new S3Client(); //need dependencies
         S3Client s3Client = S3Client.builder()
